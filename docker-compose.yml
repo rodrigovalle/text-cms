@@ -17,3 +17,4 @@ services:
 
   db:
     image: redis:4
+    volumes: ./redis.conf:/usr/local/etc/redis/redis.conf
