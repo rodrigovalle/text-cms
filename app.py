@@ -14,16 +14,30 @@ db_login = {
     'host': 'localhost', # host ip address
     'port': 6379,
     #'password': 'password'
+    'decode_responses': True
 }
 
 
-def main():
-    db = redis.Redis(**db_login)
-    load_articles(db)
+@app.route('/articles/<name>')
+def show_article(name):
+    db = get_db()
+    title, author = db.hmget(name + ':metadata', 'title', 'author')
+    text = db.get(name + ':text')
+    return '<h1>{}</h1>\n<h3>by {}</h3>\n{}'.format(title, author, text)
 
 
-def load_articles(db):
+def get_db():
+    """Open a new database connection if one doesn't exist in our app context"""
+    if not hasattr(flask.g, 'redis_db'):
+        flask.g.redis_db = redis.Redis(**db_login)
+    return flask.g.redis_db
+
+
+@app.cli.command('load')
+def load_articles():
     """Load our articles into Redis"""
+    db = get_db()
+
     with os.scandir(path=article_path) as it:
         for entry in it:
             if entry.is_file() and entry.name.endswith('.md'):
@@ -57,7 +71,3 @@ def parse_yaml(filepath):
             return metadata, text
 
         raise SyntaxError('Malformed article \'{}\''.format(filename))
-
-
-if __name__ == '__main__':
-    main()
