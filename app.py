@@ -11,9 +11,9 @@ article_path = content_path + 'articles/'
 
 app = flask.Flask(app_name)
 db_login = {
-    'host': 'localhost', # host ip address
+    'host': 'localhost',  # host ip address
     'port': 6379,
-    #'password': 'password'
+    # 'password': 'password'
     'decode_responses': True
 }
 
@@ -23,11 +23,12 @@ def show_article(name):
     db = get_db()
     title, author = db.hmget(name + ':metadata', 'title', 'author')
     text = db.get(name + ':text')
-    return '<h1>{}</h1>\n<h3>by {}</h3>\n{}'.format(title, author, text)
+    return flask.render_template('article_layout.html',
+                                 title=title, author=author, text=text)
 
 
 def get_db():
-    """Open a new database connection if one doesn't exist in our app context"""
+    """Open a new database connection if one doesn't exist in app context"""
     if not hasattr(flask.g, 'redis_db'):
         flask.g.redis_db = redis.Redis(**db_login)
     return flask.g.redis_db
