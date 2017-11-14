@@ -51,25 +51,15 @@ def parse_yaml(filepath):
     filename = os.path.basename(filepath)
 
     with open(filepath) as f:
-        documents = yaml.load_all(f)
-        metadata = next(documents)
-        text = next(documents)
-
-        if type(metadata) is not dict or type(text) is not str:
-            raise SyntaxError('Malformed article \'{}\''.format(filename))
+        yaml_it = iter(f.readline, '---\n')     # read until we reach separator
+        metadata = yaml.load(''.join(yaml_it))  # parse yaml metadata
+        text = f.read()                         # read rest of file
 
         if 'tags' in metadata:
             warnings.warn('Article tags not yet supported', stacklevel=2)
             del metadata['tags']
 
-        try:
-            # this should fail
-            # a properly formatted article has only two YAML documents
-            next(documents)
-        except StopIteration:
-            return metadata, text
-
-        raise SyntaxError('Malformed article \'{}\''.format(filename))
+        return metadata, text
 
 
 if __name__ == '__main__':
