@@ -5,13 +5,12 @@ import yaml
 import warnings
 import os
 
-app_name = 'prime'
 content_path = 'content/'
 article_path = content_path + 'articles/'
 
-app = flask.Flask(app_name)
+app = flask.Flask(__name__)
 db_login = {
-    'host': 'localhost',  # host ip address
+    'host': 'db',  # host ip address
     'port': 6379,
     # 'password': 'password'
     'decode_responses': True
@@ -34,7 +33,6 @@ def get_db():
     return flask.g.redis_db
 
 
-@app.cli.command('load')
 def load_articles():
     """Load our articles into Redis"""
     db = get_db()
@@ -72,3 +70,13 @@ def parse_yaml(filepath):
             return metadata, text
 
         raise SyntaxError('Malformed article \'{}\''.format(filename))
+
+
+if __name__ == '__main__':
+    with app.app_context():
+        load_articles()
+
+    app.run(
+        host='0.0.0.0',
+        port=5000
+    )
