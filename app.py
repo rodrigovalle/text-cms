@@ -1,6 +1,8 @@
 import flask
 import redis
 import yaml
+import markdown
+import markdown.extensions.toc as toc
 
 import warnings
 import os
@@ -15,6 +17,12 @@ db_login = {
     # 'password': 'password'
     'decode_responses': True
 }
+
+toc_extension = toc.TocExtension(baselevel=2)
+markdown_parser = markdown.Markdown(
+    extensions=[toc_extension, 'markdown.extensions.smarty'],
+    output_format='html5'
+)
 
 
 @app.route('/articles/<name>')
@@ -40,10 +48,17 @@ def load_articles():
     with os.scandir(path=article_path) as it:
         for entry in it:
             if entry.is_file() and entry.name.endswith('.md'):
-                metadata, text = parse_yaml(entry.path)
-                article_name, _ = entry.name.rsplit('.', 1)
-                db.set(article_name + ':text', text)
-                db.hmset(article_name + ':metadata', metadata)
+                load_article(entry.path)
+
+
+def load_article(filepath):
+    db = get_db()
+
+    metadata, md = parse_yaml(filepath)
+    html = parse_markdown(md)
+    article_name, _ = os.path.basename(filepath).rsplit('.', 1)
+    db.set(article_name + ':html', html)
+    db.hmset(article_name + ':metadata', metadata)
 
 
 def parse_yaml(filepath):
@@ -60,6 +75,10 @@ def parse_yaml(filepath):
             del metadata['tags']
 
         return metadata, text
+
+
+def parse_markdown(text):
+    return markdown_parser.convert(text)
 
 
 if __name__ == '__main__':
