@@ -1,0 +1,27 @@
+.col3__block .col3__block-imgbox {
+  overflow: hidden; }
+  .col3__block .col3__block-imgbox p {
+    text-align: right;
+    color: gray;
+    font-size: 1em; }
+  .col3__block .col3__block-imgbox .col3__block-imgbox-img {
+    display: block;
+    /* margin:-21.875% 0; */
+    overflow: hidden;
+    /* height: 40px;
+    width: 100px;
+    object-fit: cover; */
+    vertical-align: center; }
+.col3__block .col3__block-textbox .col3__block-textbox-pretitle {
+  font-size: 1.5em;
+  text-align: left; }
+.col3__block .col3__block-textbox .col3__block-textbox-title {
+  font-size: 2em;
+  text-align: left; }
+.col3__block .col3__block-textbox .col3__block-textbox-author {
+  font-size: 1.5em;
+  text-align: left; }
+.col3__block:not(:last-child) {
+  border-right: 1px solid gray; }
+
+/*# sourceMappingURL=3col.css.map */
