@@ -1,5 +1,7 @@
 title: 'City Guide: Malibu'
 author: Maryrose Kulick
+category: Arts
+issue: Fall 2018
 date: November 5, 2016
 tags:
   - malibu
