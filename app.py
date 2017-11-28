@@ -27,10 +27,8 @@ markdown_parser = markdown.Markdown(
 @app.route('/articles/<name>')
 def show_article(name):
     db = get_db()
-    title, author = db.hmget(name + ':metadata', 'title', 'author')
-    text = db.get(name + ':text')
-    return flask.render_template('article_layout.html',
-                                 title=title, author=author, text=text)
+    article = db.hgetall(name)
+    return flask.render_template('article.html', article=article)
 
 
 def get_db():
@@ -56,27 +54,29 @@ def load_articles():
 def load_article(filepath):
     db = get_db()
 
-    metadata, md = parse_yaml(filepath)
-    html = parse_markdown(md)
+    data = parse_article(filepath)
     article_name, _ = os.path.basename(filepath).rsplit('.', 1)
-    db.set(article_name + ':html', html)
-    db.hmset(article_name + ':metadata', metadata)
+    db.hmset(article_name, data)
 
 
-def parse_yaml(filepath):
-    """Parse an article file and return (metadata, text)"""
+def parse_article(filepath):
+    """Parse an article file and return a dictionary with metadata and text"""
     filename = os.path.basename(filepath)
 
     with open(filepath) as f:
-        yaml_it = iter(f.readline, '---\n')     # read until we reach separator
-        metadata = yaml.load(''.join(yaml_it))  # parse yaml metadata
-        text = f.read()                         # read rest of file
+        yaml_it = iter(f.readline, '---\n')  # read until we reach separator
+        data = yaml.load(''.join(yaml_it))   # parse yaml metadata
+        text = f.read()                      # read rest of file
+        data['html'] = parse_markdown(text)
 
-        if 'tags' in metadata:
-            warnings.warn('Article tags not yet supported', stacklevel=2)
-            del metadata['tags']
+        if 'tags' in data:
+            warnings.warn('tags not yet supported', stacklevel=2)
+            del data['tags']
 
-        return metadata, text
+        keys = ['title', 'author', 'date', 'category', 'issue']
+        assert all(key in data for key in keys), 'missing article metadata'
+
+        return data
 
 
 def parse_markdown(text):
