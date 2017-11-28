@@ -8,7 +8,6 @@ import warnings
 import os
 
 content_path = 'content/'
-article_path = content_path + 'articles/'
 
 app = flask.Flask(__name__)
 db_login = {
@@ -45,10 +44,13 @@ def load_articles():
     """Load our articles into Redis"""
     db = get_db()
 
-    with os.scandir(path=article_path) as it:
-        for entry in it:
-            if entry.is_file() and entry.name.endswith('.md'):
-                load_article(entry.path)
+    subdirs = [e.path for e in os.scandir(content_path) if e.is_dir()]
+
+    for subdir in subdirs:
+        with os.scandir(subdir) as it:
+            for entry in it:
+                if entry.is_file() and entry.name.endswith('.md'):
+                    load_article(entry.path)
 
 
 def load_article(filepath):
