@@ -3,16 +3,16 @@
 {% block content %}
 <div id="main">
   <div>
-    {% include "partials/articleinfo.njk" %}
+    {% include "partials/articleinfo.html" %}
   </div>
   <div class="columns small-12 medium-8">
     <div class="content">
-      {{ article.text }}
+      {{ article.html }}
     </div>
   </div>
   <div class="columns small-12 medium-4">
     <div class="popular-stories">
-      {% include "partials/popular_stories.njk" %}
+      {% include "partials/popular_stories.html" %}
     </div>
   </div>
 </div>
