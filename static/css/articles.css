@@ -1,0 +1,41 @@
+.article__category {
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 18pt;
+  line-height: 1;
+}
+
+.article__title {
+  font-family: 'Ropa Sans', sans-serif;
+  font-size: 45pt;
+  line-height: 1.1;
+  margin-bottom: 38px;
+}
+
+.article__author {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15pt;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.article__issue {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15pt;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+article p:first-child:first-letter {
+  float: left;
+  font-size: 75px;
+  line-height: 60px;
+  padding-top: 4px;
+  padding-right: 8px;
+  padding-left: 3px;
+}
+
+article p {
+  font-family: 'PT Serif', serif;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFydGljbGVzLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxxQ0FBb0M7RUFDcEMsZ0JBQWU7RUFDZixlQUFjO0NBQ2Y7O0FBRUQ7RUFDRSxxQ0FBb0M7RUFDcEMsZ0JBQWU7RUFDZixpQkFBZ0I7RUFDaEIsb0JBQW1CO0NBQ3BCOztBQUVEO0VBQ0Usc0NBQXFDO0VBQ3JDLGdCQUFlO0VBQ2YsaUJBQWdCO0VBQ2hCLGVBQWM7Q0FDZjs7QUFFRDtFQUNFLHNDQUFxQztFQUNyQyxnQkFBZTtFQUNmLGlCQUFnQjtFQUNoQixvQkFBbUI7Q0FDcEI7O0FBRUQ7RUFFSSxZQUFXO0VBQ1gsZ0JBQWU7RUFDZixrQkFBaUI7RUFDakIsaUJBQWdCO0VBQ2hCLG1CQUFrQjtFQUNsQixrQkFBaUI7Q0FDbEI7O0FBUkg7RUFXSSwrQkFBOEI7Q0FDL0IiLCJmaWxlIjoiYXJ0aWNsZXMuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFydGljbGVfX2NhdGVnb3J5IHtcbiAgZm9udC1mYW1pbHk6ICdSb3BhIFNhbnMnLCBzYW5zLXNlcmlmO1xuICBmb250LXNpemU6IDE4cHQ7XG4gIGxpbmUtaGVpZ2h0OiAxO1xufVxuXG4uYXJ0aWNsZV9fdGl0bGUge1xuICBmb250LWZhbWlseTogJ1JvcGEgU2FucycsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogNDVwdDtcbiAgbGluZS1oZWlnaHQ6IDEuMTtcbiAgbWFyZ2luLWJvdHRvbTogMzhweDtcbn1cblxuLmFydGljbGVfX2F1dGhvciB7XG4gIGZvbnQtZmFtaWx5OiAnTW9udHNlcnJhdCcsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMTVwdDtcbiAgZm9udC13ZWlnaHQ6IDcwMDtcbiAgbGluZS1oZWlnaHQ6IDE7XG59XG5cbi5hcnRpY2xlX19pc3N1ZSB7XG4gIGZvbnQtZmFtaWx5OiAnTW9udHNlcnJhdCcsIHNhbnMtc2VyaWY7XG4gIGZvbnQtc2l6ZTogMTVwdDtcbiAgZm9udC13ZWlnaHQ6IDQwMDtcbiAgbWFyZ2luLWJvdHRvbTogMzBweDtcbn1cblxuYXJ0aWNsZSB7XG4gIHA6Zmlyc3QtY2hpbGQ6Zmlyc3QtbGV0dGVyIHtcbiAgICBmbG9hdDogbGVmdDtcbiAgICBmb250LXNpemU6IDc1cHg7XG4gICAgbGluZS1oZWlnaHQ6IDYwcHg7XG4gICAgcGFkZGluZy10b3A6IDRweDtcbiAgICBwYWRkaW5nLXJpZ2h0OiA4cHg7XG4gICAgcGFkZGluZy1sZWZ0OiAzcHg7XG4gIH1cblxuICBwIHtcbiAgICBmb250LWZhbWlseTogJ1BUIFNlcmlmJywgc2VyaWY7XG4gIH1cbn0iXX0= */
