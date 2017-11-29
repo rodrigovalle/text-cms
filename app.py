@@ -73,7 +73,7 @@ def parse_article(filepath):
             warnings.warn('tags not yet supported', stacklevel=2)
             del data['tags']
 
-        keys = ['title', 'author', 'date', 'category', 'issue']
+        keys = ['title', 'author', 'category', 'issue']
         assert all(key in data for key in keys), 'missing article metadata'
 
         return data
